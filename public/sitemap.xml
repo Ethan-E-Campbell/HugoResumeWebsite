@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>ecampbell.dev/categories/</loc>
+    <loc>192.168.0.101/categories/</loc>
   </url><url>
-    <loc>ecampbell.dev/</loc>
+    <loc>192.168.0.101/</loc>
   </url><url>
-    <loc>ecampbell.dev/tags/</loc>
+    <loc>192.168.0.101/tags/</loc>
   </url>
 </urlset>
