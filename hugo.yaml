@@ -62,7 +62,7 @@ params:
   title: "Hugo Profile"
   description: Text about my cool site
   # staticPath: ""  # The path to serve the static files from
-  favicon: "/E.svg"
+  favicon: "/pictures/E.svg"
 
   # Whether to serve bootstrap css and js files from CDN or not. Can be set to true, "css" or "js" to choose between
   # serving both, only the css, or only the js files through the CDN. Any other value will make so that CDN is not used.
@@ -137,14 +137,14 @@ params:
     title: "My name is Ethan."
     subtitle: "I love to build things."
     content: "A backend developer with a knack for problem-solving, I specialize in leveraging AWS technologies to design reliable and replicable microservice architectures."
-    image: /IMG_headshot.JPG
+    image: /pictures/IMG_headshot.JPG
     bottomImage:
       enable: true
     # roundImage: true # Make hero image circular | default false
     button:
       enable: true
       name: "Resume"
-      url: "/Ethan_Campbell_Resume.pdf"
+      url: "/resume/Ethan_Campbell_Resume.pdf"
       download: true
       newPage: false
     socialLinks:
@@ -161,7 +161,7 @@ params:
   about:
     enable: true
     title: "About Me"
-    image: "/PXL_cars.jpg"
+    image: "/pictures/PXL_cars.jpg"
     content: |-
       I am a software developer with a focus on AWS cloud technologies and database experience. 
       My educational background is in Computer Science, with a Master of Business Administration. 
@@ -286,7 +286,7 @@ params:
       - title: AWS Certified Cloud Practitioner
         content: Certified Cloud Practitioner - March 2025
         url: https://www.credly.com/badges/0c9956e3-8326-4141-b181-be5e85eb1af3
-        image: /awsccp.png
+        image: /pictures/awsccp.png
       # - title: Facebook Hackathon Winner
       #   content: Developed a product using Artificial Intelligence.
       #   image: /images/achievement.jpg
