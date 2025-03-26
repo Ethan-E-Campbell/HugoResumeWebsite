@@ -1,4 +1,4 @@
-baseURL: "ecampbell.dev"
+baseURL: ""
 languageCode: "en-us"
 title: "Ethan Campbell - Software Dev"
 theme: hugo-profile
