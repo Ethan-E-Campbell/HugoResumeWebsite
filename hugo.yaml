@@ -59,8 +59,8 @@ markup:
     #   weight: 2
 
 params:
-  title: "Hugo Profile"
-  description: Text about my cool site
+  title: "Ethan Campbell Profile"
+  description: Ethan Campbell - Software Dev
   # staticPath: ""  # The path to serve the static files from
   favicon: "/pictures/E.svg"
 
