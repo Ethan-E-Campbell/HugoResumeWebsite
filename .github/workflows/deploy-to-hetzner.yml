@@ -1,11 +1,34 @@
+name: Build and Deploy Hugo to Hetzner Webhosting
+
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Install Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+
+      - name: Build Hugo site
+        run: hugo --minify
+
+      - name: Deploy via FTP to Hetzner Webhosting
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.HETZNER_FTP_HOST }}
+          username: ${{ secrets.HETZNER_FTP_USER }}
+          password: ${{ secrets.HETZNER_FTP_PASS }}
+          protocol: ftps
+          local-dir: public
+          server-dir: /public_html/
+          exclude: |
+            **/.git*
+            **/.github*
