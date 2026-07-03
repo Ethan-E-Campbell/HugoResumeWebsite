@@ -13,8 +13,17 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
 
     steps:
+      - name: Validate FTP secrets
+        shell: bash
+        run: |
+          if [ -z "${{ secrets.HETZNER_FTP_HOST }}" ] || [ -z "${{ secrets.HETZNER_FTP_USER }}" ] || [ -z "${{ secrets.HETZNER_FTP_PASS }}" ]; then
+            echo "Missing one or more required FTP secrets."
+            exit 1
+          fi
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
