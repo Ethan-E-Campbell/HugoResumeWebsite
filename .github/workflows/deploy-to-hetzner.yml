@@ -20,6 +20,7 @@ jobs:
       HETZNER_SFTP_HOST: ${{ secrets.HETZNER_FTP_HOST }}
       HETZNER_SFTP_USER: ${{ secrets.HETZNER_FTP_USER }}
       HETZNER_SFTP_PASS: ${{ secrets.HETZNER_FTP_PASS }}
+      HETZNER_SFTP_KEY: ${{ secrets.HETZNER_SFTP_KEY }}
 
     steps:
       - name: Validate SFTP secrets
@@ -54,14 +55,18 @@ jobs:
           find public -maxdepth 2 -type f | head -20
 
       - name: Deploy via SFTP to Hetzner Webhosting
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
-        with:
-          server: ${{ env.HETZNER_SFTP_HOST }}
-          username: ${{ env.HETZNER_SFTP_USER }}
-          password: ${{ env.HETZNER_SFTP_PASS }}
-          protocol: sftp
-          local-dir: public/
-          server-dir: /public_html/
-          exclude: |
-            **/.git*
-            **/.github*
+        uses: bash
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.HETZNER_SFTP_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.HETZNER_SFTP_HOST }}" >> ~/.ssh/known_hosts
+
+          sftp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+            "${{ secrets.HETZNER_SFTP_USER }}@${{ secrets.HETZNER_SFTP_HOST }}" <<'EOF'
+          cd /public_html
+          lcd public
+          put -r *
+          bye
+          EOF
