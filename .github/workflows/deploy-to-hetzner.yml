@@ -1,9 +1,15 @@
-name: Build and Deploy Hugo to Hetzner Webhosting
+name: Build and Deploy Hugo Website
 
 on:
   workflow_dispatch:
   push:
     branches: [ main ]
+
+inputs:
+  environment:
+    description: 'Deployment environment'
+    required: true
+    type: environment
 
 jobs:
   deploy:
@@ -12,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Install Hugo
         uses: peaceiris/actions-hugo@v3
@@ -22,7 +30,7 @@ jobs:
         run: hugo --minify
 
       - name: Deploy via FTP to Hetzner Webhosting
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.HETZNER_FTP_HOST }}
           username: ${{ secrets.HETZNER_FTP_USER }}
