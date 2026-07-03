@@ -22,7 +22,7 @@ jobs:
         run: hugo --minify
 
       - name: Deploy via FTP to Hetzner Webhosting
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.HETZNER_FTP_HOST }}
           username: ${{ secrets.HETZNER_FTP_USER }}
