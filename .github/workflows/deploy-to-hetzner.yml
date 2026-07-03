@@ -2,14 +2,13 @@ name: Build and Deploy Hugo Website
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        type: environment
   push:
     branches: [ main ]
-
-inputs:
-  environment:
-    description: 'Deployment environment'
-    required: true
-    type: environment
 
 jobs:
   deploy:
