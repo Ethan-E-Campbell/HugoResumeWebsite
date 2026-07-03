@@ -1,4 +1,4 @@
-name: Build and Deploy Hugo to Hetzner Webhosting
+name: Build and Deploy Hugo Website
 
 on:
   workflow_dispatch:
