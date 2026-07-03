@@ -44,7 +44,7 @@ jobs:
           username: ${{ secrets.HETZNER_FTP_USER }}
           password: ${{ secrets.HETZNER_FTP_PASS }}
           protocol: ftps
-          local-dir: public
+          local-dir: public/
           server-dir: /public_html/
           exclude: |
             **/.git*
