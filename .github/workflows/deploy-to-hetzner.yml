@@ -5,16 +5,30 @@ on:
     inputs:
       environment:
         description: 'Deployment environment'
-        required: true
+        required: false
+        default: 'production'
         type: environment
-  push:
-    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: ${{ github.event.inputs.environment }}
+    env:
+      HETZNER_SFTP_HOST: ${{ secrets.HETZNER_FTP_HOST }}
+      HETZNER_SFTP_USER: ${{ secrets.HETZNER_FTP_USER }}
+      HETZNER_SFTP_PASS: ${{ secrets.HETZNER_FTP_PASS }}
+      HETZNER_SFTP_KEY: ${{ secrets.HETZNER_SFTP_KEY }}
 
     steps:
+      - name: Validate SFTP secrets
+        shell: bash
+        run: |
+          if [ -z "$HETZNER_SFTP_HOST" ] || [ -z "$HETZNER_SFTP_USER" ] || [ -z "$HETZNER_SFTP_PASS" ]; then
+            echo "Missing one or more required SFTP secrets."
+            exit 1
+          fi
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -28,15 +42,41 @@ jobs:
       - name: Build Hugo site
         run: hugo --minify
 
-      - name: Deploy via FTP to Hetzner Webhosting
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
-        with:
-          server: ${{ secrets.HETZNER_FTP_HOST }}
-          username: ${{ secrets.HETZNER_FTP_USER }}
-          password: ${{ secrets.HETZNER_FTP_PASS }}
-          protocol: ftps
-          local-dir: public
-          server-dir: /public_html/
-          exclude: |
-            **/.git*
-            **/.github*
+      - name: Verify publish directory
+        shell: bash
+        run: |
+          if [ ! -d public ]; then
+            echo "Publish directory 'public' was not found."
+            exit 1
+          fi
+          echo "Publish directory contents:"
+          find public -maxdepth 2 -type f | head -20
+
+      - name: Deploy via SFTP to Hetzner Webhosting
+        shell: bash
+        run: |
+          set -x
+          echo "Host: $HETZNER_SFTP_HOST"
+          echo "User: $HETZNER_SFTP_USER"
+          echo "Key file: ~/.ssh/id_ed25519"
+
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$HETZNER_SFTP_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "--- key file preview ---"
+          head -n 3 ~/.ssh/id_ed25519
+          echo "--- scanning host ---"
+          ssh-keyscan -H "$HETZNER_SFTP_HOST" >> ~/.ssh/known_hosts || true
+          echo "--- known_hosts ---"
+          cat ~/.ssh/known_hosts || true
+
+          echo "--- starting sftp ---"
+          sftp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes -o BatchMode=yes \
+            "$HETZNER_SFTP_USER@$HETZNER_SFTP_HOST" <<'EOF'
+          cd /public_html
+          lcd public
+          put -r .
+          bye
+          EOF
+          echo "--- sftp finished ---"
