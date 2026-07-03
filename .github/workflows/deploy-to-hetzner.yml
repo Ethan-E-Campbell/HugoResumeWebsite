@@ -78,7 +78,7 @@ jobs:
             "$HETZNER_SFTP_USER@$HETZNER_SFTP_HOST" <<'EOF'
           cd /public_html
           lcd public
-          put -r *
+          put -r .
           bye
           EOF
           echo "--- sftp finished ---"
