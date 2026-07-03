@@ -5,6 +5,12 @@ on:
   push:
     branches: [ main ]
 
+inputs:
+  environment:
+    description: 'Deployment environment'
+    required: true
+    type: environment
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
