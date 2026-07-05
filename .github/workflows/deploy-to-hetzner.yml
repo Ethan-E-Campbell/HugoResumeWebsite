@@ -50,6 +50,15 @@ jobs:
           fi
           echo "Publish directory contents:"
           find public -maxdepth 2 -type f | head -20
+      - name: delete fontawesome-6 folder
+        shell: bash
+        run: |
+          if [ -d public/fontawesome-6 ]; then
+            echo "Deleting 'public/fontawesome-6' directory."
+            rm -rf public/fontawesome-6
+          else
+            echo "'public/fontawesome-6' directory does not exist. Skipping deletion."
+          fi
 
       - name: Deploy via SFTP to Hetzner Webhosting
         shell: bash
