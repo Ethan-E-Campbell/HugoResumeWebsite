@@ -8,6 +8,9 @@ on:
         required: false
         default: 'production'
         type: environment
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
