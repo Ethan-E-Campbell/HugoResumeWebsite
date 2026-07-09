@@ -268,6 +268,10 @@ params:
         content: Certified Cloud Practitioner - March 2025
         url: https://www.credly.com/badges/0c9956e3-8326-4141-b181-be5e85eb1af3
         image: /pictures/awsccp.png
+      - title: Confluent Data Streaming Engineer Foundations
+        content: Data Streaming Engineer Foundations - July 2026
+        url: https://certificates.confluent.io/d411a6cb-c130-4319-b708-65824ef82007#acc.ounjU1im
+        image: /pictures/confluent_data_streaming_foundations.png
 
 
   # projects
