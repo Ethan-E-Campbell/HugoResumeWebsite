@@ -18,7 +18,7 @@ jobs:
       HETZNER_SFTP_HOST: ${{ secrets.HETZNER_FTP_HOST }}
       HETZNER_SFTP_USER: ${{ secrets.HETZNER_FTP_USER }}
       HETZNER_SFTP_KEY: ${{ secrets.HETZNER_SFTP_KEY }}
-      HETZNER_SFTP_FOLDER: ${{ env.FOLDER }}
+      HETZNER_SFTP_FOLDER: ${{ vars.FOLDER }}
 
     steps:
 
