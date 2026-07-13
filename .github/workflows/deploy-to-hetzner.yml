@@ -18,14 +18,15 @@ jobs:
       HETZNER_SFTP_HOST: ${{ secrets.HETZNER_FTP_HOST }}
       HETZNER_SFTP_USER: ${{ secrets.HETZNER_FTP_USER }}
       HETZNER_SFTP_KEY: ${{ secrets.HETZNER_SFTP_KEY }}
+      HETZNER_SFTP_FOLDER: ${{ env.FOLDER }}
 
     steps:
 
-      - name: Validate SFTP secrets
+      - name: Validate SFTP secrets and folder
         shell: bash
         run: |
-          if [ -z "$HETZNER_SFTP_HOST" ] || [ -z "$HETZNER_SFTP_USER" ] || [ -z "$HETZNER_SFTP_KEY" ]; then
-            echo "Missing one or more required SFTP secrets."
+          if [ -z "$HETZNER_SFTP_HOST" ] || [ -z "$HETZNER_SFTP_USER" ] || [ -z "$HETZNER_SFTP_KEY" ] || [ -z "$HETZNER_SFTP_FOLDER" ]; then
+            echo "Missing one or more required SFTP secrets or HETZNER_SFTP_FOLDER."
             exit 1
           fi
 
@@ -73,11 +74,13 @@ jobs:
           echo "--- scanning host ---"
           ssh-keyscan -H "$HETZNER_SFTP_HOST" >> ~/.ssh/known_hosts || true
           echo "--- starting sftp ---"
-          sftp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes -o BatchMode=yes \
-            "$HETZNER_SFTP_USER@$HETZNER_SFTP_HOST" <<'EOF'
-          cd /public_html
-          lcd public
-          put -r .
-          bye
-          EOF
+          # Use HETZNER_SFTP_FOLDER; fail earlier if empty
+          TARGET="$HETZNER_SFTP_FOLDER"
+          echo "Deploy target folder: $TARGET"
+          # Build an SFTP batch file so we can keep the YAML indentation clean
+          SFTP_BATCH=$(mktemp)
+          printf '%s\n' "cd \"$TARGET\"" "lcd public" "put -r ." "bye" > "$SFTP_BATCH"
+          sftp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes -o BatchMode=yes -b "$SFTP_BATCH" \
+            "$HETZNER_SFTP_USER@$HETZNER_SFTP_HOST"
+          rm -f "$SFTP_BATCH"
           echo "--- sftp finished ---"
