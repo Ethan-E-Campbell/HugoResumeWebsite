@@ -74,10 +74,8 @@ jobs:
           echo "--- scanning host ---"
           ssh-keyscan -H "$HETZNER_SFTP_HOST" >> ~/.ssh/known_hosts || true
           echo "--- starting sftp ---"
-          # Use HETZNER_SFTP_FOLDER; fail earlier if empty
           TARGET="$HETZNER_SFTP_FOLDER"
           echo "Deploy target folder: $TARGET"
-          # Build an SFTP batch file so we can keep the YAML indentation clean
           SFTP_BATCH=$(mktemp)
           printf '%s\n' "cd \"$TARGET\"" "lcd public" "put -r ." "bye" > "$SFTP_BATCH"
           sftp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes -o BatchMode=yes -b "$SFTP_BATCH" \
