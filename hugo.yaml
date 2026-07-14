@@ -137,7 +137,7 @@ params:
     title: "My name is Ethan."
     subtitle: "I love to build things."
     content: "A software engineer with a knack for problem-solving, I specialize in leveraging AWS technologies to design reliable and replicable microservice architectures."
-    image: /pictures/IMG_headshot.JPG
+    image: /pictures/headshot.webp
     bottomImage:
       enable: true
     # roundImage: true # Make hero image circular | default false
