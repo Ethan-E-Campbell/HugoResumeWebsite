@@ -137,7 +137,7 @@ params:
     title: "My name is Ethan."
     subtitle: "I love to build things."
     content: "A software engineer with a knack for problem-solving, I specialize in leveraging AWS technologies to design reliable and replicable microservice architectures."
-    image: /pictures/IMG_headshot.JPG
+    image: /pictures/headshot.webp
     bottomImage:
       enable: true
     # roundImage: true # Make hero image circular | default false
@@ -161,7 +161,7 @@ params:
   about:
     enable: true
     title: "About Me"
-    image: "/pictures/PXL_cars.jpg"
+    image: "/pictures/my-cars.webp"
     content: |-
       I am a software engineer with a focus on AWS cloud technologies and database experience. 
       I have a Bachelor of Science in Computer Science, as well as an MBA. 
@@ -267,11 +267,11 @@ params:
       - title: AWS Certified Cloud Practitioner
         content: Certified Cloud Practitioner - March 2025
         url: https://www.credly.com/badges/0c9956e3-8326-4141-b181-be5e85eb1af3
-        image: /pictures/awsccp.png
+        image: /pictures/aws-ccp.webp
       - title: Confluent Data Streaming Engineer Foundations
         content: Data Streaming Engineer Foundations - July 2026
         url: https://certificates.confluent.io/d411a6cb-c130-4319-b708-65824ef82007
-        image: /pictures/confluent_data_streaming_foundations.png
+        image: /pictures/confluent-data-streaming-foundations.webp
 
 
   # projects
@@ -281,7 +281,6 @@ params:
     items:
       - title: File Transfer Wizard
         content: A work in progress python based platform using streamlit that allows users to encrypt and transfer files using SFTP and PGP encryption.
-        image: /images/projects/profile.png
         badges:
           - "Python"
           - "GNUPG"
