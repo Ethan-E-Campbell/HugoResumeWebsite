@@ -185,27 +185,27 @@ params:
     enable: true
     # title: "Custom Name"
     items:
-      - job: " Senior Software Developer"
+      - job: " Senior Software Engineer"
         company: "J M Smucker Company"
         companyUrl: "https://www.jmsmucker.com/"
         date: "July 2025 - present"
         info:
           enable: false
         content: |
-          Promoted to senior software developer. I support Procurement, Accounts Payable, and Demand and Supply Planning operations in this position.
+          Promoted to senior software engineer. I support Procurement, Accounts Payable, and Demand and Supply Planning operations in this position.
           - Designed and implemented a modern file transfer system built on AWS, utilizing Transfer Family, Lambda, S3, SQS, and other AWS services.
           - Wrote multiple python based lambda solutions to do last-mile delivery of files to on-prem servers / users
           - Assumed ownership of the Accounts Payable domain.
           - Driving modernization as part of the team leading the company from a 20 year old on-prem Oracle ERP to Oracle Fusion Cloud ERP.
-      - job: "Software Developer"
+      - job: "Software Engineer"
         company: "J M Smucker Company"
         companyUrl: "https://www.jmsmucker.com/"
         date: "June 2023 - July 2025"
         info:
-          enable: true
-          content: Due to my work in this position, I was promoted to a senior software developer role in July 2025.
+          enable: false
+          content: Due to my work in this position, I was promoted to a senior software engineer role in July 2025.
         content: |
-          Software developer. In this role, I supported Planning and Procurement Supply Chain operations.
+          Software engineer. In this role, I supported Planning and Procurement Supply Chain operations.
           - Architected and implemented an AWS cloud stack that manipulates XML data from vendors that eventually creates a Purchase Order, under a tight one month deadline.
           - Enhanced an AWS Lambda based solution that manipulates data between on-premises Oracle databases and a cloud vendor.
           - Developed PL/SQL packages to support Demand and Supply Planning operations within the company.
@@ -223,10 +223,12 @@ params:
       #     - Implemented Lambda, Lambda Layers, and other AWS technologies.
       #     - Researched and implemented Bref, which allows PHP applications to run on AWS Lambda.
       #     - Developed proof-of-concepts and implemented a variety of AWS technologies: An AWS POC that I developed dealing with Docker containers, Lambda, and Aurora was considered as a replacement for an existing asset management system.
-      - job: "IT support and system administration internships"
+      - job: "Cloud Engineer, IT, and system administration internships"
         company: "Internships"
         # companyUrl: "https://inside.heidelberg.edu/departments-offices/cnit"
         date: "Aug 2021 - May 2023"
+        info:
+          enable: false
         # featuredLink:
         #   enable: true
         #   url: "https://example.com"
