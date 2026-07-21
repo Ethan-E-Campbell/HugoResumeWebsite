@@ -211,6 +211,16 @@ params:
           - icon: fab fa-github
             url: https://github.com/Ethan-E-Campbell/File-Transfer-Wizard
 
+      - title: Hugo Resume Website
+        content: A personal website built using the Hugo static site generator and the hugo-profile theme. You're on it right now!
+        badges:
+          - "Hugo"
+          - "HTML"
+          - "CSS"
+        links:
+          - icon: fab fa-github
+            url: https://github.com/Ethan-E-Campbell/HugoResumeWebsite
+
   #Contact
   contact:
     enable: true
