@@ -14,12 +14,6 @@ outputs:
 
 enableRobotsTXT: true
 
-#services:
-  #googleAnalytics:
-    #id: G-MEASUREMENT_ID
-  #disqus:
-    #shortname: your-disqus-shortname
-
 pagination:
   pagerSize: 3
 
@@ -27,36 +21,6 @@ markup:
   goldmark:
     renderer:
       unsafe: true
-
-# Menus:
-#   main:
-    # - identifier: blog
-    #   name: Blog
-    #   title: Blog posts
-    #   url: /blogs
-    #   weight: 1
-    # - identifier: gallery
-    #   name: Gallery
-    #   title: Blog posts
-    #   url: /gallery
-    #   weight: 2
-    #Dropdown menu
-    # - identifier: dropdown
-    #   title: Example dropdown menu
-    #   name: Dropdown
-    #   weight: 3
-    # - identifier: dropdown1
-    #   title: example dropdown 1
-    #   name: example 1
-    #   url: /#
-    #   parent: dropdown
-    #   weight: 1
-    # - identifier: dropdown2
-    #   title: example dropdown 2
-    #   name: example 2
-    #   url: /#
-    #   parent: dropdown
-    #   weight: 2
 
 params:
   title: "Ethan Campbell"
@@ -69,12 +33,6 @@ params:
   # Note the lack of "" in true, it should be of boolean type.
   useBootstrapCDN: false
 
-  # If you want to load dynamically responsive images from Cloudinary
-  # This requires your images to be uploaded + hosted on Cloudinary
-  # Uncomment and change YOUR_CLOUD_NAME to the Cloud Name in your Cloudinary console
-  # cloudinary_cloud_name: "YOUR_CLOUD_NAME"
-
-  # Whether to add mathjax support on all pages. Alternatively, you can opt-in per page by adding `mathjax: true` in the frontmatter.
   mathjax: false
 
   # Whether the fade animations on the home page will be enabled
@@ -89,26 +47,6 @@ params:
     fontWeight: 400 # default: 400
     lineHeight: 1.5 # default: 1.5
     textAlign: left # default: left
-
-  # color preference
-  # When using hex codes for colors, quotations must be used along with the # sign
-  # color:
-  #   textColor: "#343a40"
-  #   secondaryTextColor: "#6c757d"
-  #   textLinkColor: "#007bff"
-  #   backgroundColor: "#eaedf0"
-  #   secondaryBackgroundColor: "#64ffda1a"
-  #   primaryColor: "#007bff"
-  #   secondaryColor: "#f8f9fa"
-
-  #   darkmode:
-  #     textColor: "#e4e6eb"
-  #     secondaryTextColor: "#b0b3b8"
-  #     textLinkColor: "#ffffff"
-  #     backgroundColor: "#18191a"
-  #     secondaryBackgroundColor: "#212529"
-  #     primaryColor: "#ffffff"
-  #     secondaryColor: "#212529"
 
   # If you want to customize the menu, you can change it here
   navbar:
@@ -140,7 +78,6 @@ params:
     image: /pictures/headshot.webp
     bottomImage:
       enable: true
-    # roundImage: true # Make hero image circular | default false
     button:
       enable: true
       name: "Resume"
@@ -153,9 +90,7 @@ params:
           url: https://github.com/Ethan-E-Campbell
         - icon: fab fa-linkedin
           url: https://www.linkedin.com/in/ethan-e-campbell/
-      # customIcons:
-      #   - icon: /fav.png
-      #     url: "https://example.com"
+
 
   # About
   about:
@@ -197,6 +132,7 @@ params:
           - Wrote multiple python based lambda solutions to do last-mile delivery of files to on-prem servers / users
           - Assumed ownership of the Accounts Payable domain.
           - Driving modernization as part of the team leading the company from a 20 year old on-prem Oracle ERP to Oracle Fusion Cloud ERP.
+
       - job: "Software Engineer"
         company: "J M Smucker Company"
         companyUrl: "https://www.jmsmucker.com/"
@@ -211,27 +147,11 @@ params:
           - Developed PL/SQL packages to support Demand and Supply Planning operations within the company.
           - Presented Playwright tests and API testing concepts during a large internal developers forum to over 100 attendees.
 
-      # - job: "Cloud Engineer Intern"
-      #   company: "J M Smucker Company"
-      #   companyUrl: "https://www.jmsmucker.com/"
-      #   date: "May 2022 - Aug 2022"
-      #   info:
-      #     enable: true
-      #     content: I was an intern at the J. M. Smucker Co, and was offered a full time position after graduation.
-      #   content: |
-      #     - Developed an AWS Serverless Application using SAM CLI to manipulate JIF peanut butter recall data.
-      #     - Implemented Lambda, Lambda Layers, and other AWS technologies.
-      #     - Researched and implemented Bref, which allows PHP applications to run on AWS Lambda.
-      #     - Developed proof-of-concepts and implemented a variety of AWS technologies: An AWS POC that I developed dealing with Docker containers, Lambda, and Aurora was considered as a replacement for an existing asset management system.
       - job: "Cloud Engineer, IT, and system administration internships"
         company: "Internships"
-        # companyUrl: "https://inside.heidelberg.edu/departments-offices/cnit"
         date: "Aug 2021 - May 2023"
         info:
           enable: false
-        # featuredLink:
-        #   enable: true
-        #   url: "https://example.com"
         content: |
           - Cloud Engineer Intern at J. M. Smucker. Offered a full time position after graduation. May 2022 - August 2022.
           - Student Helpdesk Support Technician at Heidelberg University.  August 2021 - May 2023
