@@ -46,14 +46,14 @@ jobs:
           prod_folder = "/public_html"
           mkdir -p "$prod_folder"
           SFTP_SOURCE_BATCH=$(mktemp)
-          printf '%s\n' "lcd $prod_folder" "get -r \"$prod_folder\"" "bye" > "$SFTP_SOURCE_BATCH"
+          printf '%s\n' "lcd /public_html" "get -r \"/public_html\"" "bye" > "$SFTP_SOURCE_BATCH"
           sftp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes -o BatchMode=yes -b "$SFTP_SOURCE_BATCH" \
             "$HETZNER_SFTP_USER@$HETZNER_SFTP_HOST"
 
           TARGET="$HETZNER_SFTP_FOLDER"
           echo "Deploy target folder: $TARGET"
           SFTP_TARGET_BATCH=$(mktemp)
-          printf '%s\n' "cd \"$TARGET\"" "lcd $prod_folder" "put -r ." "bye" > "$SFTP_TARGET_BATCH"
+          printf '%s\n' "cd \"$TARGET\"" "lcd /public_html" "put -r ." "bye" > "$SFTP_TARGET_BATCH"
           sftp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes -o BatchMode=yes -b "$SFTP_TARGET_BATCH" \
             "$HETZNER_SFTP_USER@$HETZNER_SFTP_HOST"
           rm -f "$SFTP_BATCH"
