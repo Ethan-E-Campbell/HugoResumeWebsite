@@ -29,32 +29,3 @@ jobs:
             echo "Missing one or more required SFTP secrets or HETZNER_SFTP_FOLDER."
             exit 1
           fi
-
-      - name: Deploy via SFTP to Hetzner Webhosting
-        shell: bash
-        run: |
-          set -x
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          printf '%s\n' "$HETZNER_SFTP_KEY" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          echo "--- scanning host ---"
-          ssh-keyscan -H "$HETZNER_SFTP_HOST" >> ~/.ssh/known_hosts || true
-          echo "--- starting sftp refresh ---"
-
-          echo "-- starting download of PROD"
-          prod_folder = "/public_html"
-          mkdir -p "$prod_folder"
-          SFTP_SOURCE_BATCH=$(mktemp)
-          printf '%s\n' "lcd $prod_folder" "get -r \"$prod_folder\"" "bye" > "$SFTP_SOURCE_BATCH"
-          sftp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes -o BatchMode=yes -b "$SFTP_SOURCE_BATCH" \
-            "$HETZNER_SFTP_USER@$HETZNER_SFTP_HOST"
-
-          TARGET="$HETZNER_SFTP_FOLDER"
-          echo "Deploy target folder: $TARGET"
-          SFTP_TARGET_BATCH=$(mktemp)
-          printf '%s\n' "cd \"$TARGET\"" "lcd $prod_folder" "put -r ." "bye" > "$SFTP_TARGET_BATCH"
-          sftp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes -o BatchMode=yes -b "$SFTP_TARGET_BATCH" \
-            "$HETZNER_SFTP_USER@$HETZNER_SFTP_HOST"
-          rm -f "$SFTP_BATCH"
-          echo "--- sftp finished ---"
