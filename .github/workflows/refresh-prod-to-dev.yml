@@ -1,0 +1,31 @@
+name: Refresh Prod to Dev
+run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }}
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: environment
+
+jobs:
+  deploy-to-hetzner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: ${{ github.event.inputs.environment }}
+    env:
+      HETZNER_SFTP_HOST: ${{ secrets.HETZNER_FTP_HOST }}
+      HETZNER_SFTP_USER: ${{ secrets.HETZNER_FTP_USER }}
+      HETZNER_SFTP_KEY: ${{ secrets.HETZNER_SFTP_KEY }}
+      HETZNER_SFTP_FOLDER: ${{ vars.FOLDER }}
+
+    steps:
+
+      - name: Validate SFTP secrets and folder
+        shell: bash
+        run: |
+          if [ -z "$HETZNER_SFTP_HOST" ] || [ -z "$HETZNER_SFTP_USER" ] || [ -z "$HETZNER_SFTP_KEY" ] || [ -z "$HETZNER_SFTP_FOLDER" ]; then
+            echo "Missing one or more required SFTP secrets or HETZNER_SFTP_FOLDER."
+            exit 1
+          fi
